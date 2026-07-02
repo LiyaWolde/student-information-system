@@ -9,7 +9,6 @@ public class StudentInformationSystem {
         System.out.println("===========================================");
     }
 
-
     // Determines the student's performance
     public static String getPerformance(double cgpa) {
         if (cgpa >= 3.5) {
@@ -34,15 +33,36 @@ public class StudentInformationSystem {
 
         Scanner input = new Scanner(System.in);
 
+        // Display the welcome banner
         welcome();
 
-        // User Input
-        System.out.print("\nEnter your full name: ");
-        String name = input.nextLine();
+        // --- NAME INPUT LOOP ---
+        String name;
+        while (true) {
+            System.out.print("\nEnter your full name: ");
+            name = input.nextLine();
 
-        System.out.print("Enter your age: ");
-        int age = input.nextInt();
-        input.nextLine(); // Clear buffer
+            // Validates that it's not empty AND contains only letters and spaces
+            if (!name.trim().isEmpty() && name.matches("[a-zA-Z\\s]+")) {
+                break; // Escape the loop if the name is perfectly valid!
+            } else {
+                System.out.println("-> Invalid name! Name cannot be empty and must contain only letters/spaces.");
+            }
+        }
+
+        // --- AGE INPUT LOOP ---
+        int age;
+        while (true) {
+            System.out.print("Enter your age: ");
+            age = input.nextInt();
+            input.nextLine(); // Clear buffer
+
+            if (age >= 16 && age <= 100) {
+                break; // Kick out of the loop because the age is valid!
+            } else {
+                System.out.println("-> Invalid age! Age must be between 16 and 100. Try again.");
+            }
+        }
 
         System.out.print("Enter your gender (Male/Female): ");
         String gender = input.nextLine();
@@ -53,8 +73,18 @@ public class StudentInformationSystem {
         System.out.print("Enter your department: ");
         String department = input.nextLine();
 
-        System.out.print("Enter your CGPA: ");
-        double cgpa = input.nextDouble();
+        // --- CGPA INPUT LOOP ---
+        double cgpa;
+        while (true) {
+            System.out.print("Enter your CGPA: ");
+            cgpa = input.nextDouble();
+
+            if (cgpa >= 0.0 && cgpa <= 4.0) {
+                break; // Kick out of the loop because the CGPA is valid!
+            } else {
+                System.out.println("-> Invalid CGPA! Must be between 0.0 and 4.0. Try again.");
+            }
+        }
 
         System.out.print("Enter number of courses: ");
         int courses = input.nextInt();
@@ -62,7 +92,7 @@ public class StudentInformationSystem {
         System.out.print("Enter expected graduation year: ");
         int graduationYear = input.nextInt();
 
-        // Display Student Summary
+        // 2. Display Student Summary
         System.out.println("\n===========================================");
         System.out.println("            STUDENT SUMMARY");
         System.out.println("===========================================");
